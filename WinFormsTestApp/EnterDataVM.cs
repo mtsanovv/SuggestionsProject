@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -139,6 +140,31 @@ namespace WinFormsTestApp
                 PropChanged("CatIDIsFocused");
             }
         }
+
+        private string _selectedSuggestion;
+        public string SelectedSuggestion
+        {
+            get
+            {
+                return _selectedSuggestion;
+            }
+            set
+            {
+                _selectedSuggestion = value;
+            }
+        }
+
+        public void SelectedSuggestionChanged(Object sender, EventArgs e)
+        {
+            if (SelectedSuggestion != null)
+            {
+                _enterSuggestions.Select(this, CurrentUser, _selectedSuggestion);
+                PropChanged("UsernameTextBox");
+                PropChanged("PasswordTextBox");
+                PropChanged("EmailTextBox");
+                PropChanged("CatIDTextBox");
+            }
+        }
         public EnterDataVM()
         {
             _enterSuggestions = new EnterSuggestions("users.txt");
@@ -151,6 +177,33 @@ namespace WinFormsTestApp
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+        public bool IsValid(string emailaddress)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(emailaddress);
+
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+        public void AddUser(object sender, EventArgs e)
+        {
+            if (IsValid(EmailTextBox))
+            {
+                CurrentUser = new User(UsernameTextBox, PasswordTextBox, EmailTextBox, Int32.Parse(CatIDTextBox));
+                CurrentUser.addToDatabase();
+
+            }
+            else
+            {
+                MessageBox.Show("Invalid email address!");
+            }
+            _enterSuggestions.TrySaveSuggestion(CurrentUser, IsValid, "Email");
         }
     }
 }

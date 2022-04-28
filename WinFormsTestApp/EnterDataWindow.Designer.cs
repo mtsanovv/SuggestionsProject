@@ -38,7 +38,6 @@
             this.catIdTextBox = new System.Windows.Forms.TextBox();
             this.suggestionsListBox = new System.Windows.Forms.ListBox();
             this.addButton = new System.Windows.Forms.Button();
-            this.checkUsernameFocusedBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // emailLabel
@@ -124,23 +123,12 @@
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
             // 
-            // checkUsernameFocusedBtn
-            // 
-            this.checkUsernameFocusedBtn.AutoSize = true;
-            this.checkUsernameFocusedBtn.Location = new System.Drawing.Point(313, 369);
-            this.checkUsernameFocusedBtn.Name = "checkUsernameFocusedBtn";
-            this.checkUsernameFocusedBtn.Size = new System.Drawing.Size(75, 23);
-            this.checkUsernameFocusedBtn.TabIndex = 10;
-            this.checkUsernameFocusedBtn.Text = "Button";
-            this.checkUsernameFocusedBtn.UseVisualStyleBackColor = true;
-            // 
             // EnterDataWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.checkUsernameFocusedBtn);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.suggestionsListBox);
             this.Controls.Add(this.catIdTextBox);
@@ -168,8 +156,7 @@
         private System.Windows.Forms.TextBox usernameTextBox;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.TextBox catIdTextBox;
-        private System.Windows.Forms.ListBox suggestionsListBox;
+        public System.Windows.Forms.ListBox suggestionsListBox;
         private System.Windows.Forms.Button addButton;
-        private System.Windows.Forms.Button checkUsernameFocusedBtn;
     }
 }
