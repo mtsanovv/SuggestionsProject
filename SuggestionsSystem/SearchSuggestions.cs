@@ -15,8 +15,8 @@ namespace SuggestionsSystem
         static string filename;
         static PropertyInfo InputProperty;
         static PropertyInfo TextBoxFocusProperty;
-        static ObservableCollection<string> ResultProperty { get; set; }
-        static ObservableCollection<string> SuggestionsProperty { get; set; }
+        static IList<string> ResultProperty { get; set; }
+        static IList<string> SuggestionsProperty { get; set; }
         //public SearchSuggestions()
         //{
         //    filename = null;
@@ -67,7 +67,7 @@ namespace SuggestionsSystem
 
             }
         }
-        public static void SwitchContext(object targetVM, string filename, string inputPropertyName, string textBoxFocusProperty, ObservableCollection<string> resultProperty, ObservableCollection<string> suggestionsProperty)
+        public static void SwitchContext(object targetVM, string filename, string inputPropertyName, string textBoxFocusProperty, IList<string> resultProperty, IList<string> suggestionsProperty)
         {
             SearchSuggestions.filename = filename;
             InputProperty = targetVM.GetType().GetProperty(inputPropertyName);

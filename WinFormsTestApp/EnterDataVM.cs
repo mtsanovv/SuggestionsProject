@@ -35,7 +35,7 @@ namespace WinFormsTestApp
             }
         }
 
-        private BindingList<string> _suggestions = new BindingList<string>();
+        private BindingList<string> _suggestions;
         public BindingList<string> Suggestions
         {
             get { return _suggestions; }
@@ -167,6 +167,7 @@ namespace WinFormsTestApp
         }
         public EnterDataVM()
         {
+            _suggestions = new BindingList<string>();
             _enterSuggestions = new EnterSuggestions("users.txt");
             CurrentUser = new User();
         }
