@@ -13,6 +13,7 @@ namespace WinFormsTestApp
     public partial class EnterDataWindow : Form
     {
         private EnterDataVM VM;
+        public TextBox lastFocusedTextBox;
 
         public EnterDataWindow()
         {
@@ -22,16 +23,58 @@ namespace WinFormsTestApp
         }
         private void bindControls()
         {
-            emailTextBox.DataBindings.Add("Text", VM, "EmailTextBox", true, DataSourceUpdateMode.OnPropertyChanged);
-            usernameTextBox.DataBindings.Add("Text", VM, "UsernameTextBox", true, DataSourceUpdateMode.OnPropertyChanged);
-            passwordTextBox.DataBindings.Add("Text", VM, "PasswordTextBox", true, DataSourceUpdateMode.OnPropertyChanged);
-            catIdTextBox.DataBindings.Add("Text", VM, "CatIDTextBox", true, DataSourceUpdateMode.OnPropertyChanged);
+            bindTextBoxesWithPropertiesAndEvents();
 
             addButton.Click += VM.AddUser;
 
             suggestionsListBox.DataSource = VM.Suggestions;
             suggestionsListBox.DataBindings.Add("SelectedValue", VM, "SelectedSuggestion", true, DataSourceUpdateMode.OnPropertyChanged);
-            suggestionsListBox.SelectedIndexChanged += VM.SelectedSuggestionChanged;
+            suggestionsListBox.KeyDown += SuggestionsListBoxKeyDown;
+            suggestionsListBox.DoubleClick += SuggestionsListBoxDoubleClick;
+        }
+
+        private void bindTextBoxesWithPropertiesAndEvents()
+        {
+            foreach(Control control in this.Controls)
+            {
+                if (control is TextBox)
+                {
+                    control.DataBindings.Add("Text", VM, control.Name, true, DataSourceUpdateMode.OnPropertyChanged);
+                    control.KeyDown += TextBoxKeyDown;
+                    control.GotFocus += TextBoxFocused;
+                }
+            }
+        }
+
+        private void SuggestionsListBoxKeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                VM.SelectedSuggestionChanged(lastFocusedTextBox);
+            }
+        }
+
+        private void SuggestionsListBoxDoubleClick(object sender, EventArgs e)
+        {
+            VM.SelectedSuggestionChanged(lastFocusedTextBox);
+        }
+
+        private void TextBoxKeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Down && suggestionsListBox.Items.Count > 0)
+            {
+                lastFocusedTextBox = sender as TextBox;
+                suggestionsListBox.Focus();
+                // the SelectedIndex has to change in order to allow key events on the suggestions list box
+                int savedSuggestionsListBoxSelectedIndex = suggestionsListBox.SelectedIndex;
+                suggestionsListBox.SelectedIndex = -1;
+                suggestionsListBox.SelectedIndex = savedSuggestionsListBoxSelectedIndex;
+            }
+        }
+
+        private void TextBoxFocused(object sender, EventArgs e)
+        {
+            lastFocusedTextBox = sender as TextBox;
         }
     }
 }

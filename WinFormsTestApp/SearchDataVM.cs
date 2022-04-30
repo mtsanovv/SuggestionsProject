@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using SuggestionsSystem;
 
 namespace WinFormsTestApp
@@ -203,9 +204,14 @@ namespace WinFormsTestApp
             SearchSuggestions.TrySaveSuggestion(this);
         }
 
-        public void SelectedSuggestionChanged(object sender, EventArgs e)
+        public void SelectedSuggestionChanged(TextBox textBoxToFocus)
         {
-            SearchSuggestions.Select(this, _selectedSuggestion);
+            if (SelectedSuggestion != null)
+            {
+                SearchSuggestions.Select(this, SelectedSuggestion);
+                textBoxToFocus.Focus();
+                textBoxToFocus.Select(textBoxToFocus.Text.Length, 0);
+            }
         }
     }
 }

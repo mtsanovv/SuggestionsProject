@@ -32,10 +32,10 @@
             this.usernameLabel = new System.Windows.Forms.Label();
             this.passwordLabel = new System.Windows.Forms.Label();
             this.catIdLabel = new System.Windows.Forms.Label();
-            this.emailTextBox = new System.Windows.Forms.TextBox();
-            this.usernameTextBox = new System.Windows.Forms.TextBox();
-            this.passwordTextBox = new System.Windows.Forms.TextBox();
-            this.catIdTextBox = new System.Windows.Forms.TextBox();
+            this.EmailTextBox = new System.Windows.Forms.TextBox();
+            this.UsernameTextBox = new System.Windows.Forms.TextBox();
+            this.PasswordTextBox = new System.Windows.Forms.TextBox();
+            this.CatIDTextBox = new System.Windows.Forms.TextBox();
             this.suggestionsListBox = new System.Windows.Forms.ListBox();
             this.addButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -76,35 +76,35 @@
             this.catIdLabel.TabIndex = 3;
             this.catIdLabel.Text = "CatID:";
             // 
-            // emailTextBox
+            // EmailTextBox
             // 
-            this.emailTextBox.Location = new System.Drawing.Point(97, 44);
-            this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Size = new System.Drawing.Size(132, 20);
-            this.emailTextBox.TabIndex = 4;
+            this.EmailTextBox.Location = new System.Drawing.Point(97, 44);
+            this.EmailTextBox.Name = "EmailTextBox";
+            this.EmailTextBox.Size = new System.Drawing.Size(132, 20);
+            this.EmailTextBox.TabIndex = 4;
             // 
-            // usernameTextBox
+            // UsernameTextBox
             // 
-            this.usernameTextBox.Location = new System.Drawing.Point(97, 86);
-            this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.Size = new System.Drawing.Size(132, 20);
-            this.usernameTextBox.TabIndex = 5;
+            this.UsernameTextBox.Location = new System.Drawing.Point(97, 86);
+            this.UsernameTextBox.Name = "UsernameTextBox";
+            this.UsernameTextBox.Size = new System.Drawing.Size(132, 20);
+            this.UsernameTextBox.TabIndex = 5;
             // 
-            // passwordTextBox
+            // PasswordTextBox
             // 
-            this.passwordTextBox.Location = new System.Drawing.Point(97, 127);
-            this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.Size = new System.Drawing.Size(132, 20);
-            this.passwordTextBox.TabIndex = 6;
-            this.passwordTextBox.UseSystemPasswordChar = true;
+            this.PasswordTextBox.Location = new System.Drawing.Point(97, 127);
+            this.PasswordTextBox.Name = "PasswordTextBox";
+            this.PasswordTextBox.Size = new System.Drawing.Size(132, 20);
+            this.PasswordTextBox.TabIndex = 6;
+            this.PasswordTextBox.UseSystemPasswordChar = true;
             // 
-            // catIdTextBox
+            // CatIDTextBox
             // 
-            this.catIdTextBox.Location = new System.Drawing.Point(97, 169);
-            this.catIdTextBox.Name = "catIdTextBox";
-            this.catIdTextBox.Size = new System.Drawing.Size(132, 20);
-            this.catIdTextBox.TabIndex = 7;
-            this.catIdTextBox.Text = "0";
+            this.CatIDTextBox.Location = new System.Drawing.Point(97, 169);
+            this.CatIDTextBox.Name = "CatIDTextBox";
+            this.CatIDTextBox.Size = new System.Drawing.Size(132, 20);
+            this.CatIDTextBox.TabIndex = 7;
+            this.CatIDTextBox.Text = "0";
             // 
             // suggestionsListBox
             // 
@@ -131,10 +131,10 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.suggestionsListBox);
-            this.Controls.Add(this.catIdTextBox);
-            this.Controls.Add(this.passwordTextBox);
-            this.Controls.Add(this.usernameTextBox);
-            this.Controls.Add(this.emailTextBox);
+            this.Controls.Add(this.CatIDTextBox);
+            this.Controls.Add(this.PasswordTextBox);
+            this.Controls.Add(this.UsernameTextBox);
+            this.Controls.Add(this.EmailTextBox);
             this.Controls.Add(this.catIdLabel);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.usernameLabel);
@@ -152,10 +152,10 @@
         private System.Windows.Forms.Label usernameLabel;
         private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.Label catIdLabel;
-        private System.Windows.Forms.TextBox emailTextBox;
-        private System.Windows.Forms.TextBox usernameTextBox;
-        private System.Windows.Forms.TextBox passwordTextBox;
-        private System.Windows.Forms.TextBox catIdTextBox;
+        private System.Windows.Forms.TextBox EmailTextBox;
+        private System.Windows.Forms.TextBox UsernameTextBox;
+        private System.Windows.Forms.TextBox PasswordTextBox;
+        private System.Windows.Forms.TextBox CatIDTextBox;
         public System.Windows.Forms.ListBox suggestionsListBox;
         private System.Windows.Forms.Button addButton;
     }

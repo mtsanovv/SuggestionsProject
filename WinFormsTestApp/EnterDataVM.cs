@@ -154,15 +154,17 @@ namespace WinFormsTestApp
             }
         }
 
-        public void SelectedSuggestionChanged(Object sender, EventArgs e)
+        public void SelectedSuggestionChanged(TextBox textBoxToFocus)
         {
             if (SelectedSuggestion != null)
             {
-                _enterSuggestions.Select(this, CurrentUser, _selectedSuggestion);
+                _enterSuggestions.Select(this, CurrentUser, SelectedSuggestion);
                 PropChanged("UsernameTextBox");
                 PropChanged("PasswordTextBox");
                 PropChanged("EmailTextBox");
                 PropChanged("CatIDTextBox");
+                textBoxToFocus.Focus();
+                textBoxToFocus.Select(textBoxToFocus.Text.Length, 0);
             }
         }
         public EnterDataVM()

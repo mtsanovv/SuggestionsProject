@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.nameLabel = new System.Windows.Forms.Label();
-            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.CatNameTextBox = new System.Windows.Forms.TextBox();
             this.searchNameBtn = new System.Windows.Forms.Button();
             this.breedLabel = new System.Windows.Forms.Label();
-            this.breedTextBox = new System.Windows.Forms.TextBox();
+            this.CatBreedTextBox = new System.Windows.Forms.TextBox();
             this.searchBreedBtn = new System.Windows.Forms.Button();
             this.userLabel = new System.Windows.Forms.Label();
-            this.userTextBox = new System.Windows.Forms.TextBox();
+            this.UsernameTextBox = new System.Windows.Forms.TextBox();
             this.searchUserBtn = new System.Windows.Forms.Button();
             this.emailLabel = new System.Windows.Forms.Label();
-            this.emailTextBox = new System.Windows.Forms.TextBox();
+            this.EmailTextBox = new System.Windows.Forms.TextBox();
             this.searchEmailBtn = new System.Windows.Forms.Button();
             this.catsListBox = new System.Windows.Forms.ListBox();
             this.usersListBox = new System.Windows.Forms.ListBox();
@@ -54,12 +54,12 @@
             this.nameLabel.TabIndex = 0;
             this.nameLabel.Text = "Name:";
             // 
-            // nameTextBox
+            // CatNameTextBox
             // 
-            this.nameTextBox.Location = new System.Drawing.Point(68, 22);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(125, 20);
-            this.nameTextBox.TabIndex = 1;
+            this.CatNameTextBox.Location = new System.Drawing.Point(68, 22);
+            this.CatNameTextBox.Name = "CatNameTextBox";
+            this.CatNameTextBox.Size = new System.Drawing.Size(125, 20);
+            this.CatNameTextBox.TabIndex = 1;
             // 
             // searchNameBtn
             // 
@@ -79,12 +79,12 @@
             this.breedLabel.TabIndex = 3;
             this.breedLabel.Text = "Breed:";
             // 
-            // breedTextBox
+            // CatBreedTextBox
             // 
-            this.breedTextBox.Location = new System.Drawing.Point(68, 105);
-            this.breedTextBox.Name = "breedTextBox";
-            this.breedTextBox.Size = new System.Drawing.Size(125, 20);
-            this.breedTextBox.TabIndex = 4;
+            this.CatBreedTextBox.Location = new System.Drawing.Point(68, 105);
+            this.CatBreedTextBox.Name = "CatBreedTextBox";
+            this.CatBreedTextBox.Size = new System.Drawing.Size(125, 20);
+            this.CatBreedTextBox.TabIndex = 4;
             // 
             // searchBreedBtn
             // 
@@ -104,12 +104,12 @@
             this.userLabel.TabIndex = 6;
             this.userLabel.Text = "User:";
             // 
-            // userTextBox
+            // UsernameTextBox
             // 
-            this.userTextBox.Location = new System.Drawing.Point(68, 272);
-            this.userTextBox.Name = "userTextBox";
-            this.userTextBox.Size = new System.Drawing.Size(125, 20);
-            this.userTextBox.TabIndex = 7;
+            this.UsernameTextBox.Location = new System.Drawing.Point(68, 272);
+            this.UsernameTextBox.Name = "UsernameTextBox";
+            this.UsernameTextBox.Size = new System.Drawing.Size(125, 20);
+            this.UsernameTextBox.TabIndex = 7;
             // 
             // searchUserBtn
             // 
@@ -129,12 +129,12 @@
             this.emailLabel.TabIndex = 9;
             this.emailLabel.Text = "Email:";
             // 
-            // emailTextBox
+            // EmailTextBox
             // 
-            this.emailTextBox.Location = new System.Drawing.Point(68, 357);
-            this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Size = new System.Drawing.Size(125, 20);
-            this.emailTextBox.TabIndex = 10;
+            this.EmailTextBox.Location = new System.Drawing.Point(68, 357);
+            this.EmailTextBox.Name = "EmailTextBox";
+            this.EmailTextBox.Size = new System.Drawing.Size(125, 20);
+            this.EmailTextBox.TabIndex = 10;
             // 
             // searchEmailBtn
             // 
@@ -179,16 +179,16 @@
             this.Controls.Add(this.usersListBox);
             this.Controls.Add(this.catsListBox);
             this.Controls.Add(this.searchEmailBtn);
-            this.Controls.Add(this.emailTextBox);
+            this.Controls.Add(this.EmailTextBox);
             this.Controls.Add(this.emailLabel);
             this.Controls.Add(this.searchUserBtn);
-            this.Controls.Add(this.userTextBox);
+            this.Controls.Add(this.UsernameTextBox);
             this.Controls.Add(this.userLabel);
             this.Controls.Add(this.searchBreedBtn);
-            this.Controls.Add(this.breedTextBox);
+            this.Controls.Add(this.CatBreedTextBox);
             this.Controls.Add(this.breedLabel);
             this.Controls.Add(this.searchNameBtn);
-            this.Controls.Add(this.nameTextBox);
+            this.Controls.Add(this.CatNameTextBox);
             this.Controls.Add(this.nameLabel);
             this.Name = "SearchDataWindow";
             this.Text = "SearchDataWindow";
@@ -200,16 +200,16 @@
         #endregion
 
         private System.Windows.Forms.Label nameLabel;
-        private System.Windows.Forms.TextBox nameTextBox;
+        private System.Windows.Forms.TextBox CatNameTextBox;
         private System.Windows.Forms.Button searchNameBtn;
         private System.Windows.Forms.Label breedLabel;
-        private System.Windows.Forms.TextBox breedTextBox;
+        private System.Windows.Forms.TextBox CatBreedTextBox;
         private System.Windows.Forms.Button searchBreedBtn;
         private System.Windows.Forms.Label userLabel;
-        private System.Windows.Forms.TextBox userTextBox;
+        private System.Windows.Forms.TextBox UsernameTextBox;
         private System.Windows.Forms.Button searchUserBtn;
         private System.Windows.Forms.Label emailLabel;
-        private System.Windows.Forms.TextBox emailTextBox;
+        private System.Windows.Forms.TextBox EmailTextBox;
         private System.Windows.Forms.Button searchEmailBtn;
         public System.Windows.Forms.ListBox catsListBox;
         public System.Windows.Forms.ListBox usersListBox;
