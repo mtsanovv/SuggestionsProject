@@ -2,19 +2,30 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace TestApp
+namespace SuggestionsSystem.Models
 {
     public class Users
     {
         static string connectionString = "SERVER=localhost;DATABASE=wpf_test_app;UID=root";
-        MySqlConnection connection = new MySqlConnection(connectionString);
-        ObservableCollection<string> _data = new ObservableCollection<string>();
-        public ObservableCollection<string> GetData()
+        private MySqlConnection connection;
+        private IList<string> _data;
+        public Users(IList<string> list = null)
+        {
+            connection = new MySqlConnection(connectionString);
+            if (list != null)
+            {
+                _data = list;
+                return;
+            }
+            _data = new ObservableCollection<string>();
+        }
+        public IList<string> GetData()
         {
             string connectionString = "SERVER=localhost;DATABASE=wpf_test_app;UID=root";
 
@@ -35,7 +46,7 @@ namespace TestApp
             return _data;
         }
 
-        public ObservableCollection<string> SearchByUsername(string username)
+        public IList<string> SearchByUsername(string username)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT * FROM users WHERE username LIKE @searchPhrase", connection);
             string searchPhrase = "%" + username + "%";
@@ -54,7 +65,7 @@ namespace TestApp
             return _data;
         }
 
-        public ObservableCollection<string> SearchByEmail(string email)
+        public IList<string> SearchByEmail(string email)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT * FROM users WHERE email LIKE @searchPhrase", connection);
             string searchPhrase = "%" + email + "%";

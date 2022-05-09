@@ -90,14 +90,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cats.cs" />
     <Compile Include="EnterDataWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EnterDataWindow.Designer.cs">
       <DependentUpon>EnterDataWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="SearchDataVM.cs" />
     <Compile Include="SearchDataWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,7 +110,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Users.cs" />
     <EmbeddedResource Include="EnterDataWindow.resx">
       <DependentUpon>EnterDataWindow.cs</DependentUpon>
     </EmbeddedResource>

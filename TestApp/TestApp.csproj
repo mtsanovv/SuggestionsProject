@@ -113,16 +113,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Cats.cs" />
     <Compile Include="EnterDataWindow.xaml.cs">
       <DependentUpon>EnterDataWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="FocusExtension.cs" />
-    <Compile Include="SearchDataVM.cs" />
     <Compile Include="SearchDataWindow.xaml.cs">
       <DependentUpon>SearchDataWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Users.cs" />
     <Page Include="EnterDataWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

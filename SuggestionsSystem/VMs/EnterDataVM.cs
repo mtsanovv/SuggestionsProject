@@ -8,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using GalaSoft.MvvmLight.Command;
+using SuggestionsSystem.Models;
 
-namespace SuggestionsSystem
+namespace SuggestionsSystem.VMs
 {
     public class EnterDataVM : DependencyObject, INotifyPropertyChanged
     {

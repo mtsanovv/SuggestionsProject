@@ -1,21 +1,28 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+using System.Windows;
 
-namespace WinFormsTestApp
+namespace SuggestionsSystem.Models
 {
     public class Cats
     {
-        private BindingList<string> _data;
-        public Cats(BindingList<string> cats)
+        private IList<string> _data;
+        public Cats(IList<string> list = null)
         {
-            _data = cats;
+            if(list != null)
+            {
+                _data = list;
+                return;
+            }
+            _data = new ObservableCollection<string>();
         }
-        public BindingList<string> GetData()
+        public IList<string> GetData()
         {
             string connectionString = "SERVER=localhost;DATABASE=wpf_test_app;UID=root";
 
@@ -35,7 +42,7 @@ namespace WinFormsTestApp
 
             return _data;
         }
-        public BindingList<string> SearchByCatName(string catName)
+        public IList<string> SearchByCatName(string catName)
         {
             string connectionString = "SERVER=localhost;DATABASE=wpf_test_app;UID=root";
 
@@ -57,7 +64,7 @@ namespace WinFormsTestApp
 
             return _data;
         }
-        public BindingList<string> SearchByBreed(string breed)
+        public IList<string> SearchByBreed(string breed)
         {
             string connectionString = "SERVER=localhost;DATABASE=wpf_test_app;UID=root";
 

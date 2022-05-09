@@ -7,14 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SuggestionsSystem;
+using SuggestionsSystem.VMs;
 
 namespace WinFormsTestApp
 {
     public partial class EnterDataWindow : Form
     {
         private EnterDataVM VM;
-        public TextBox lastFocusedTextBox;
 
         public EnterDataWindow()
         {
