@@ -1,6 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
-using SuggestionsSystem;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,12 +7,17 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using GalaSoft.MvvmLight.Command;
 
-namespace TestApp
+namespace SuggestionsSystem
 {
     public class EnterDataVM : DependencyObject, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        private EnterSuggestions _enterSuggestions;
+        private static string[] propertiesToHide = { "Password", "CatID" };
         private User _currentUser;
+        private readonly bool _isWinforms = false;
         public User CurrentUser
         {
             get
@@ -24,25 +27,22 @@ namespace TestApp
             set
             {
                 _currentUser = value;
-                PropChanged("UsernameTextBox");
-                PropChanged("PasswordTextBox");
-                PropChanged("EmailTextBox");
-                PropChanged("CatIDTextBox");
+                triggerPropChangedForAllTextBoxes();
             }
         }
-        EnterSuggestions enterSuggestions = new EnterSuggestions("users.txt");
-        string[] propertiesToHide = { "Password", "CatID" };
-
-        public EnterDataVM()
+        private IList<string> _suggestions;
+        public IList<string> Suggestions
         {
-            CurrentUser = new User();
-            AddUserCommand = new RelayCommand(AddUser);
-            CheckUserCommand = new RelayCommand(printUser);
-            FocusSuggestionsBoxCommand = new RelayCommand(FocusSuggestionsBox);
-            SelectSuggestionCommand = new RelayCommand(SelectSuggestion);
-            enterSuggestions.SetSuggestionsProperty(Suggestions);
+            get 
+            { 
+                return _suggestions;
+            }
+            set 
+            {
+                _suggestions = value; 
+                PropChanged("Suggestions"); 
+            }
         }
-        private string _usernameTextBox;
         public string UsernameTextBox
         {
             get
@@ -52,12 +52,9 @@ namespace TestApp
             set
             {
                 CurrentUser.Username = value;
-                enterSuggestions.SwitchContext(this, CurrentUser, "Username", "UsernameIsFocused", Suggestions);
-                enterSuggestions.Suggest(CurrentUser,propertiesToHide);
-                PropChanged("UsernameTextBox");
+                GetSuggestions("Username");
             }
         }
-        private string _passwordTextBox;
         public string PasswordTextBox
         {
             get
@@ -67,12 +64,9 @@ namespace TestApp
             set
             {
                 CurrentUser.Password = value;
-                enterSuggestions.SwitchContext(this, CurrentUser, "Password", "PasswordIsFocused", Suggestions);
-                enterSuggestions.Suggest(CurrentUser,propertiesToHide);
-                PropChanged("PasswordTextBox");
+                GetSuggestions("Password");
             }
         }
-        private string _emailTextBox;
         public string EmailTextBox
         {
             get
@@ -82,12 +76,9 @@ namespace TestApp
             set
             {
                 CurrentUser.Email = value;
-                enterSuggestions.SwitchContext(this, CurrentUser, "Email", "EmailIsFocused", Suggestions);
-                enterSuggestions.Suggest(CurrentUser, propertiesToHide);
-                PropChanged("EmailTextBox");
+                GetSuggestions("Email");
             }
         }
-        private string _catIDTextBox;
         public string CatIDTextBox
         {
             get
@@ -96,17 +87,13 @@ namespace TestApp
             }
             set
             {
-                CurrentUser.CatID = Int32.Parse(value);
-                enterSuggestions.SwitchContext(this, CurrentUser, "CatID", "CatIDIsFocused", Suggestions);
-                enterSuggestions.Suggest(CurrentUser, propertiesToHide);
-                PropChanged("CatIDTextBox");
+                if(_isWinforms)
+                {
+                    CatIdTextBoxChangedWinForms(value);
+                    return;
+                }
+                CatIdTextBoxChangedWpf(value);
             }
-        }
-        private ObservableCollection<string> _suggestions = new ObservableCollection<string>();
-        public ObservableCollection<string> Suggestions
-        {
-            get { return _suggestions; }
-            set { _suggestions = value; PropChanged("Suggestions"); }
         }
 
         private string _selectedSuggestion;
@@ -119,13 +106,9 @@ namespace TestApp
             set
             {
                 _selectedSuggestion = value;
-                //enterSuggestions.Select(CurrentUser, _selectedSuggestion);
-                //PropChanged("UsernameTextBox");
-                //PropChanged("PasswordTextBox");
-                //PropChanged("EmailTextBox");
-                //PropChanged("CatIDTextBox");
             }
         }
+
         private bool _usernameIsFocused;
         public bool UsernameIsFocused
         {
@@ -176,7 +159,51 @@ namespace TestApp
                 PropChanged("SuggestionsIsFocused");
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
+
+        public RelayCommand AddUserCommand { get; set; }
+        public RelayCommand FocusSuggestionsBoxCommand { get; set; }
+        public RelayCommand SelectSuggestionCommand { get; set; }
+
+        // lastFocusedTextBox properties are winforms-only
+        private string _lastFocusedTextBoxName;
+        public string LastFocusedTextBoxName
+        {
+            get
+            {
+                return _lastFocusedTextBoxName;
+            }
+            set
+            {
+                _lastFocusedTextBoxName = value;
+            }
+        }
+        private readonly Action _winFormsAfterSelectedSuggestionChanged;
+        public EnterDataVM()
+        {
+            // wpf constructor should always be parameterless
+            initializeCommonProperties();
+            _suggestions = new ObservableCollection<string>();
+            AddUserCommand = new RelayCommand(AddUser);
+            FocusSuggestionsBoxCommand = new RelayCommand(FocusSuggestionsBox);
+            SelectSuggestionCommand = new RelayCommand(SelectSuggestion);
+        }
+
+        public EnterDataVM(Action selectedSuggestionChanged)
+        {
+            // winforms constructor needs parameters
+            _isWinforms = true;
+            initializeCommonProperties();
+            _suggestions = new BindingList<string>();
+            _winFormsAfterSelectedSuggestionChanged = selectedSuggestionChanged;
+        }
+
+        private void initializeCommonProperties()
+        {
+            _enterSuggestions = new EnterSuggestions("users.txt");
+            CurrentUser = new User();
+            _enterSuggestions.SetSuggestionsProperty(Suggestions);
+        }
+
         public void PropChanged(String propertyName)
         {
             if (PropertyChanged != null)
@@ -184,7 +211,7 @@ namespace TestApp
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        public RelayCommand AddUserCommand { get; set; }
+
         public bool IsValid(string emailaddress)
         {
             try
@@ -198,39 +225,72 @@ namespace TestApp
                 return false;
             }
         }
-        private void AddUser ()
+        public void AddUser()
         {
             if (IsValid(EmailTextBox))
             {
                 CurrentUser = new User(UsernameTextBox, PasswordTextBox, EmailTextBox, Int32.Parse(CatIDTextBox));
                 CurrentUser.addToDatabase();
-                
-            } else
+
+            }
+            else
             {
                 MessageBox.Show("Invalid email address!");
             }
-            enterSuggestions.TrySaveSuggestion(CurrentUser, IsValid, "Email");
+            _enterSuggestions.TrySaveSuggestion(CurrentUser, IsValid, "Email");
         }
-        public RelayCommand CheckUserCommand { get; set; }
-        private void printUser()
-        {
-            MessageBox.Show("Username focused:" + UsernameIsFocused);
-            UsernameIsFocused = true;
-            //MessageBox.Show(CurrentUser.Username + " " + CurrentUser.Password + " " + CurrentUser.Email + " " + CurrentUser.CatID);
-        }
-        public RelayCommand FocusSuggestionsBoxCommand { get; set; }
+
         private void FocusSuggestionsBox()
         {
             FocusHelper.SetFocus(this, "SuggestionsIsFocused");
         }
+
         private void SelectSuggestion()
         {
-            enterSuggestions.Select(this, CurrentUser, _selectedSuggestion);
+            _enterSuggestions.Select(this, CurrentUser, _selectedSuggestion);
+            triggerPropChangedForAllTextBoxes();
+        }
+
+        // winforms-only methods below
+        public void SelectedSuggestionChanged()
+        {
+            if (SelectedSuggestion != null)
+            {
+                _enterSuggestions.Select(this, CurrentUser, SelectedSuggestion);
+                triggerPropChangedForAllTextBoxes();
+                _winFormsAfterSelectedSuggestionChanged();
+            }
+        }
+
+        private void triggerPropChangedForAllTextBoxes()
+        {
             PropChanged("UsernameTextBox");
             PropChanged("PasswordTextBox");
             PropChanged("EmailTextBox");
             PropChanged("CatIDTextBox");
         }
-        public RelayCommand SelectSuggestionCommand { get; set; }
+
+        private void GetSuggestions(string paramID)
+        {
+            string paramFocusedName = paramID + "IsFocused";
+            string paramIDTextBox = paramID + "TextBox";
+            _enterSuggestions.SwitchContext(this, CurrentUser, paramID, paramFocusedName, Suggestions);
+            _enterSuggestions.Suggest(CurrentUser, propertiesToHide);
+            PropChanged(paramIDTextBox);
+        }
+
+        private void CatIdTextBoxChangedWinForms(string value)
+        {
+            int catId = 0;
+            Int32.TryParse(value, out catId);
+            CurrentUser.CatID = catId;
+            GetSuggestions("CatID");
+        }
+
+        private void CatIdTextBoxChangedWpf(string value)
+        {
+            CurrentUser.CatID = Int32.Parse(value);
+            GetSuggestions("CatID");
+        }
     }
 }

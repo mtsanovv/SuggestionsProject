@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:TestApp"
+        xmlns:vm="clr-namespace:SuggestionsSystem;assembly=SuggestionsSystem"
         xmlns:local="clr-namespace:TestApp"
         mc:Ignorable="d"
         Title="EnterDataWindow" Height="450" Width="800">
@@ -51,7 +51,6 @@
                 <!--<MouseBinding Command="{Binding Source={StaticResource vm}, Path=SelectSuggestionCommand}" MouseAction="LeftClick"/>-->
             </ListBox.InputBindings>
         </ListBox>
-        <Button Command="{Binding Source={StaticResource vm}, Path=CheckUserCommand}" Content="Button" HorizontalAlignment="Left" Margin="182,348,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>

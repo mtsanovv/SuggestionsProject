@@ -114,7 +114,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Cats.cs" />
-    <Compile Include="EnterDataVM.cs" />
     <Compile Include="EnterDataWindow.xaml.cs">
       <DependentUpon>EnterDataWindow.xaml</DependentUpon>
     </Compile>
@@ -123,7 +122,6 @@
     <Compile Include="SearchDataWindow.xaml.cs">
       <DependentUpon>SearchDataWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User.cs" />
     <Compile Include="Users.cs" />
     <Page Include="EnterDataWindow.xaml">
       <SubType>Designer</SubType>
