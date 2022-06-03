@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using GalaSoft.MvvmLight.Command;
 using SuggestionsSystem.Models;
+using SuggestionsSystem.VMs.Interfaces;
 
 namespace SuggestionsSystem.VMs
 {
-    public class EnterDataVM : DependencyObject, INotifyPropertyChanged
+    public class EnterDataVM : DependencyObject, INotifyPropertyChanged, IEnterDataVM
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private EnterSuggestions _enterSuggestions;
@@ -241,12 +242,12 @@ namespace SuggestionsSystem.VMs
             _enterSuggestions.TrySaveSuggestion(CurrentUser, IsValid, "Email");
         }
 
-        private void FocusSuggestionsBox()
+        public void FocusSuggestionsBox()
         {
             FocusHelper.SetFocus(this, "SuggestionsIsFocused");
         }
 
-        private void SelectSuggestion()
+        public void SelectSuggestion()
         {
             _enterSuggestions.Select(this, CurrentUser, _selectedSuggestion);
             triggerPropChangedForAllTextBoxes();
@@ -271,7 +272,7 @@ namespace SuggestionsSystem.VMs
             PropChanged("CatIDTextBox");
         }
 
-        private void GetSuggestions(string paramID)
+        public void GetSuggestions(string paramID)
         {
             string paramFocusedName = paramID + "IsFocused";
             string paramIDTextBox = paramID + "TextBox";

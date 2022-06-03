@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using GalaSoft.MvvmLight.Command;
 using SuggestionsSystem.Models;
+using SuggestionsSystem.VMs.Interfaces;
 
 namespace SuggestionsSystem.VMs
 {
-    public class SearchDataVM : DependencyObject, INotifyPropertyChanged
+    public class SearchDataVM : DependencyObject, INotifyPropertyChanged, ISearchDataVM
     {
         private Cats _cats;
         private Users _users;
@@ -271,16 +272,16 @@ namespace SuggestionsSystem.VMs
             UsersList = _users.SearchByEmail(EmailTextBox);
             TriggerSuggestions("Email", true);
         }
-        private void FocusSuggestionsBox()
+        public void FocusSuggestionsBox()
         {
             FocusHelper.SetFocus(this, "SuggestionsIsFocused");
         }
-        private void SelectSuggestion()
+        public void SelectSuggestion()
         {
             SearchSuggestions.Select(this, SelectedSuggestion);
         }
 
-        private void TriggerSuggestions(string paramID, bool shouldTrySavingSuggestion = false)
+        public void TriggerSuggestions(string paramID, bool shouldTrySavingSuggestion = false)
         {
             string focusedParam = paramID + "IsFocused";
             string textBoxParam = paramID + "TextBox";
@@ -300,7 +301,7 @@ namespace SuggestionsSystem.VMs
             PropChanged(textBoxParam);
         }
 
-        private IList<string> GetListRelatedToParamID(string paramID)
+        public IList<string> GetListRelatedToParamID(string paramID)
         {
             if (paramID.IndexOf("cat", StringComparison.OrdinalIgnoreCase) > -1)
             {
@@ -310,7 +311,7 @@ namespace SuggestionsSystem.VMs
             return UsersList;
         }
 
-        private string GetFileRelatedToParamID(string paramID)
+        public string GetFileRelatedToParamID(string paramID)
         {
             switch (paramID)
             {
