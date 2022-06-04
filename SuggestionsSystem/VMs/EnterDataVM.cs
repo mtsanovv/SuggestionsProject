@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using GalaSoft.MvvmLight.Command;
 using SuggestionsSystem.Models;
-using SuggestionsSystem.VMs.Interfaces;
+using SuggestionsSystem.Interfaces;
 
 namespace SuggestionsSystem.VMs
 {

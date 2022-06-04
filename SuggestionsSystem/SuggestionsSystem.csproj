@@ -45,9 +45,9 @@
     <Compile Include="EnterSuggestions.cs" />
     <Compile Include="FocusHelper.cs" />
     <Compile Include="SearchSuggestions.cs" />
-    <Compile Include="VMs\Interfaces\IBaseVM.cs" />
-    <Compile Include="VMs\Interfaces\IEnterDataVM.cs" />
-    <Compile Include="VMs\Interfaces\ISearchDataVM.cs" />
+    <Compile Include="Interfaces\IBaseVM.cs" />
+    <Compile Include="Interfaces\IEnterDataVM.cs" />
+    <Compile Include="Interfaces\ISearchDataVM.cs" />
     <Compile Include="VMs\SearchDataVM.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SuggestionsSystem.VMs.Interfaces
+namespace SuggestionsSystem.Interfaces
 {
     public interface IBaseVM
     {
